@@ -1,11 +1,14 @@
 import express from 'express'
 import db from './database/db.js';
-//import userRoutes from './routes/userRoutes.routes.js';
+import userRoutes from './routes/userRoutes.routes.js';
 
 const app = express();
 
 // Middleware for parsing JSON request bodies
 app.use(express.json());
+
+//Routing
+app.use(userRoutes())
 
 app.get('/start', (req, res) => {
     res.send({ message: 'Bienvenido' });
