@@ -1,4 +1,5 @@
 import express from 'express'
+import db from './database/db.js';
 
 const app = express();
 
@@ -12,3 +13,12 @@ app.get('/start', (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
     console.log(`El servidor esta corriendo en el puert0 ${process.env.PORT || 3000}`);
 })
+
+//Conexion a la base de datos
+try {
+    await db.authenticate();
+    db.sync();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
