@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 //Routing
-app.use(userRoutes())
+app.use('/auth', userRoutes)
 
 app.get('/start', (req, res) => {
     res.send({ message: 'Bienvenido' });

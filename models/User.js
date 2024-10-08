@@ -3,16 +3,16 @@ import { DataTypes, STRING } from "sequelize";
 
 const User = db.define('User', {
     name: {
-        DataTypes: STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     email: {
-        DataTypes: STRING,
+        type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
     password: {
-        DataTypes: STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     token: DataTypes.STRING,
