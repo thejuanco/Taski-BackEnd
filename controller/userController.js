@@ -1,5 +1,6 @@
 //Define la logica de la autenticacion y registro del usuario
 import User from "../models/User.js"
+import { generateId } from "../helpers/token.js";
 
 export const createUser = async (req, res) => {
     try {
@@ -18,7 +19,7 @@ export const createUser = async (req, res) => {
         lastName,
         email,
         password,
-        //token: generateToken()
+        token: generateId() 
       });
 
       console.log("Se creo al usuario");
@@ -30,7 +31,7 @@ export const createUser = async (req, res) => {
         email: newUser.email,
         password: newUser.password,
       });
-      
+
     } catch (error) {
         return res.status(500).json({message: error.message})
     }
