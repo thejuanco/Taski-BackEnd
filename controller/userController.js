@@ -9,3 +9,7 @@ export const createUser = async (req, res) => {
         return res.status(500).json({message: error.message})
     }
 }
+
+export const authenticateUser = async (req, res) => {
+    
+}
