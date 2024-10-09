@@ -1,6 +1,7 @@
 //Define la logica de la autenticacion y registro del usuario
 import User from "../models/User.js"
 import { generateId } from "../helpers/token.js";
+import { sendEmail } from "../helpers/email.js";
 
 export const createUser = async (req, res) => {
     try {
@@ -23,6 +24,9 @@ export const createUser = async (req, res) => {
       });
 
       console.log("Se creo al usuario");
+
+      //Enviando el correo
+      sendEmail()
 
       //Retorna los datos del usuario generado
       res.json({
