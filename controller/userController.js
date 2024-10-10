@@ -26,7 +26,13 @@ export const createUser = async (req, res) => {
       console.log("Se creo al usuario");
 
       //Enviando el correo
-      sendEmail()
+      sendEmail({
+        token: newUser.token,
+        to: {
+          email: newUser.email,
+          name: newUser.name
+        }
+      })
 
       //Retorna los datos del usuario generado
       res.json({
