@@ -47,6 +47,28 @@ export const createUser = async (req, res) => {
     }
 }
 
+export const confirmToken = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const user = await User.findOne({ where: { token } });
+
+    //Validar
+    if (!user) {
+      console.log("Token no válido");
+      return;
+    }
+
+    user.token = null;
+    user.confirm = true;
+    await user.save();
+
+    res.json({message: "Token confirmado correctamente"})
+
+  } catch (error) {
+    return res.status(500).json({message: error.message});
+  }
+}
+
 export const authenticateUser = async (req, res) => {
     
 }
