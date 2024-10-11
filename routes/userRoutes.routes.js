@@ -1,6 +1,10 @@
 //Define las rutas para el usuario y autenticacion
 import { Router } from "express";
-import { createUser, confirmToken, authenticateUser } from "../controller/userController.js";
+import {
+  createUser,
+  confirmToken,
+  authenticateUser,
+} from "../controller/userController.js";
 
 const router = Router();
 
