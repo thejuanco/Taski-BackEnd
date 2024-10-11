@@ -1,4 +1,5 @@
 //Define la logica de la autenticacion y registro del usuario
+import bcrypt from 'bcrypt';
 import User from "../models/User.js"
 import { generateId } from "../helpers/token.js";
 import { sendEmail, sendEmailPass } from "../helpers/email.js";
@@ -103,7 +104,6 @@ export const authenticateUser = async (req, res) => {
 export const forgotPassword = async (req, res) => {
   try {
     const {email} = req.body;
-
     const user = await User.findOne({ where: { email } });
 
     //Validar
@@ -127,6 +127,44 @@ export const forgotPassword = async (req, res) => {
     await user.save();
 
     console.log("Enlace enviado correctamente")
+  } catch (error) {
+    return res.status(500).json({message: error.message})
+  }
+}
+
+export const resetPassword = async (req, res, next) => {
+  try {
+    const { token } = req.params;
+
+    //Validar el token
+    const user = await User.findOne({where: {token}})
+
+    if(!user){
+      console.log("Token no valido")
+      return;
+    }
+    next();
+
+  } catch (error) {
+    return res.status(500).json({message: error.message})
+  }
+}
+
+export const updatePassword = async (req, res) => {
+  try {
+    const {token} = req.params
+    const {password} = req.body
+
+    const user = await User.findOne({where: {token}})
+
+    //Hashear el token
+    const salt = await bcrypt.genSalt(10)
+    user.password = await bcrypt.hash(password, salt)
+    user.token = null
+
+    await user.save();
+    console.log("Contraseña actualizada correctamente")
+    
   } catch (error) {
     return res.status(500).json({message: error.message})
   }
