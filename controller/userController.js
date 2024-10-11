@@ -70,5 +70,32 @@ export const confirmToken = async (req, res) => {
 }
 
 export const authenticateUser = async (req, res) => {
-    
+    try {
+      const {email, password} = req.body
+      
+      const user = await User.findOne({ where: { email } });
+      
+      //Validar
+      if(!user.confirm){
+        console.log("El usuario no ha confirmado su cuenta");
+        return;
+      }
+
+      if(!user){
+        console.log("El usuario no existe");
+        return;
+      }
+
+      const validPassword = await user.validatePassword(password);
+      
+      if(!validPassword){
+        console.log("Contraseña incorrecta");
+        return;
+      }
+      
+      res.json({ message: "Usuario autenticado correctamente" });
+
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
 }
