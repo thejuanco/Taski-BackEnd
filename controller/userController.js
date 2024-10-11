@@ -1,7 +1,7 @@
 //Define la logica de la autenticacion y registro del usuario
 import User from "../models/User.js"
 import { generateId } from "../helpers/token.js";
-import { sendEmail } from "../helpers/email.js";
+import { sendEmail, sendEmailPass } from "../helpers/email.js";
 
 export const createUser = async (req, res) => {
     try {
@@ -98,4 +98,36 @@ export const authenticateUser = async (req, res) => {
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
+}
+
+export const forgotPassword = async (req, res) => {
+  try {
+    const {email} = req.body;
+
+    const user = await User.findOne({ where: { email } });
+
+    //Validar
+    if(!user){
+      console.log("El usuario no existe");
+      return;
+    }
+
+    //Generar un nuevo token
+    user.token = generateId();
+
+    //Enviar el correo
+    sendEmailPass({
+      token: user.token,
+      to: {
+        email: user.email,
+        name: user.name
+      }
+    })
+
+    await user.save();
+
+    console.log("Enlace enviado correctamente")
+  } catch (error) {
+    return res.status(500).json({message: error.message})
+  }
 }
