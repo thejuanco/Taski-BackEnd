@@ -17,3 +17,14 @@ Esta API actualmente está desarrollada con Node JS, JavaScript, Express, Sequel
 
 ### Variables de entorno
 Esta API necesita las siguientes variables de entorno:
+- `PORT` Puerto para correr el servidor
+- `DATABASE_NAME` Nombre de la base de datos
+- `DATABASE_PASS` Contraseña para el acceso a la base de datos
+- `DATABASE_USER` Usuario para acceder a la base de datos
+- `DATABASE_HOST` Host en donde se encuentra la base
+- `DATABASE_PORT` Puerto de la base
+- `JWT_SECRET` Palabra para el token
+- `BREVO_APIKEY` Llave para el envio de correos con brevo (crear una cuenta en brevo y generar la apikey)
+
+### Uso
+El uso de esta aplicación es unica y exclusivamente para la demostración de habilidades, el uso en el futuro inmediato o lejano es resposabilidad del autor: Juan Manuel Cruz Ortiz
