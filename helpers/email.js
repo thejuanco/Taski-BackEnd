@@ -23,7 +23,7 @@ export const sendEmail = async ({to,token}) => {
                 <h1>Bienvenido a Taski</h1>
                 <p>Hola ${name}!</p>
                 <p>Gracias por registrarte en Taski, por favor confirma tu correo electronico</p>
-                <a href=${process.env.BACKEND_URL}:${process.env.PORT || 3000}/auth/confirm/${token}>confirmar tu cuenta</a>
+                <a href=${process.env.BACKEND_URL}/auth/confirm/${token}>confirmar tu cuenta</a>
                 <p>Este correo es automatico, por favor no respondas</p>
             </body>
         </html>`
