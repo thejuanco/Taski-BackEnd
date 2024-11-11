@@ -63,7 +63,7 @@ export const confirmToken = async (req, res) => {
     user.confirm = true;
     await user.save();
 
-    res.json({message: "Token confirmado correctamente"})
+    res.redirect(`${process.env.FRONTEND_URL}auth/confirm-user?status=success`)
 
   } catch (error) {
     return res.status(500).json({message: error.message});
