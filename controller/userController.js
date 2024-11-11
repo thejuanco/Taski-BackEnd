@@ -56,7 +56,7 @@ export const confirmToken = async (req, res) => {
     //Validar
     if (!user) {
       console.log("Token no válido");
-      return;
+      return res.redirect(`${process.env.FRONTEND_URL}/confirmacion?status=error`);
     }
 
     user.token = null;
