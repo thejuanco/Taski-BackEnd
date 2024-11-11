@@ -58,12 +58,12 @@ export const confirmToken = async (req, res) => {
       console.log("Token no válido");
       return res.redirect(`${process.env.FRONTEND_URL}/confirmacion?status=error`);
     }
+    res.redirect(`${process.env.FRONTEND_URL}/auth/confirm-user?status=success`)
 
     user.token = null;
     user.confirm = true;
     await user.save();
 
-    res.redirect(`${process.env.FRONTEND_URL}/auth/confirm-user?status=success`)
 
   } catch (error) {
     return res.status(500).json({message: error.message});
