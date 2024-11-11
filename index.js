@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import db from './database/db.js';
 import userRoutes from './routes/userRoutes.routes.js';
 
@@ -6,6 +7,7 @@ const app = express();
 
 // Middleware for parsing JSON request bodies
 app.use(express.json());
+app.use(cors());
 
 //Routing
 app.use('/auth', userRoutes)
