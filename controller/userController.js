@@ -63,7 +63,7 @@ export const confirmToken = async (req, res) => {
     user.confirm = true;
     await user.save();
     
-    res.redirect(`${process.env.FRONTEND_URL}/auth/confirm-user?status=success`)
+    res.json({ message: "Tu cuenta fue confirmada, Ahora puedes Iniciar Sesión" });
 
   } catch (error) {
     return res.status(500).json({message: error.message});
@@ -94,7 +94,7 @@ export const authenticateUser = async (req, res) => {
         return;
       }
       
-      res.json({ message: "Usuario autenticado correctamente" });
+      res.redirect(`${process.env.BACKEND_URL}`)
 
     } catch (error) {
       return res.status(500).json({ message: error.message });
